@@ -1,0 +1,96 @@
+<html>
+<head>
+<style>
+	body {
+  background-color: aqua;
+  background-image: url("https://plus.unsplash.com/premium_photo-1673998269850-8f953fd2fe0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+}
+
+.div {
+	display: flex;
+  background-color: gold;
+
+	  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  
+  width: 50%;
+
+  /* set the width of the div */
+ 
+  /* set the height of the div */
+ 
+  /* set the background color of the div */
+  margin: auto;
+  /* set the margin to auto for both horizontal and vertical axes */
+  
+
+}
+.moving-header {
+  position: absolute;
+  left: 0;
+  animation: moveHeader 1.5s linear infinite;
+}
+
+@keyframes moveHeader {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(calc(100vw - 100%));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body  >
+	<div class = 'div'>
+		<form action="/search" method="POST">
+			<label > Please Enter A Departure Airport:</label>
+			<input class = 'form-control ' type="text" name="dep_city_port" required /> </br></br>
+			<label  > Please Enter An Arrival Airport:</label>
+			<input class = 'form-control' type="text" name="des_city_port" required /></br></br>
+			<label >Please Enter A Date:</label>
+			<input class = 'form-control' type="text" name="date" required /> </br></br>
+			<input type="submit" value=Search class = 'btn-outline-danger' />
+		</form>
+		<label > Your search query should appear below</label>
+		<table>
+			<th>Flight Number |</th>
+			<th>Departure Time |</th>
+			<th>Arrival Time |</th>
+		
+			{% for line in result %}
+			<tr>
+				<td>{{line[0]}}</td>
+				<td>{{line[1]}}</td>
+				<td>{{line[2]}}</td>
+			</tr>
+			{% endfor %}
+		
+		</table>
+		
+		{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+		{% endif %}
+		<div> 
+					<button class = "btn-outline-success"><a href="/login">Login</a></button>
+					<button class = "btn-outline-danger"><a href="/register">Register</a></button>
+		</div>
+
+
+	</div>
+<p class='moving-header' style="color:red;font-size: 60px; text-align: center;">Welcome to <strong>FlightGenius</strong>
+	Airticket Reservation System!</p>
+	
+
+</body>
+
+
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+	body {
+		background-color: aqua;
+  background-image: url("https://plus.unsplash.com/premium_photo-1673998269850-8f953fd2fe0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+
+	}
+
+	.div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-direction: column;
+		
+		width: 50%;
+		/* set the width of the div */
+		height: 400px;
+		/* set the height of the div */
+		background-color: gold;
+		/* set the background color of the div */
+		margin: auto;
+		/* set the margin to auto for both horizontal and vertical axes */
+		position: absolute;
+		/* set the position to absolute to center the div in the middle of the page */
+	
+		/* set the right position to 0 */
+	}
+</style>
+</head>
+<body>
+	<div class = 'div'>
+<form action="/loginAuth" method="POST">
+	<p>Please choose your role...</p>
+	<input class = 'custom-radio' type="radio" id="customer" name="logtype" value="Customer">
+	  <label for="customer">Customer</label><br>
+	<input type="radio" id="agent" name="logtype" value="Agent">
+	  <label for="agent">Agent</label><br>
+	<input type="radio" id="staff" name="logtype" value="Airline Staff">
+	  <label for="staff">Airline Staff</label><br>
+	<input class = 'form-control'type="text" name="username" placeholder="username" required /> </br>
+	<input class = 'form-control' type="password" name="password" placeholder="password" required /></br>
+	<input class = 'btn-outline-danger'  type="submit" value=Login />
+	{% if error %}
+	<p class="error"><strong>An error occured. Please check:</strong> {{error}}</p>
+	{% endif %}
+</form>
+
+<button class ='btn-outline-danger'><a href="/">Go back</a></button>
+	</div>
+
+
+
+
+</body>
+
+
+</html>

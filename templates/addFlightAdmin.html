@@ -1,0 +1,116 @@
+<html>
+<head>
+
+<style>
+    body {
+        background-color: aqua;
+  background-image: url("https://plus.unsplash.com/premium_photo-1673998269850-8f953fd2fe0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+
+    }
+
+    .div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        height: 20px;
+        width: 50%;
+        /* set the width of the div */
+        height: 300px;
+        /* set the height of the div */
+        background-color: white;
+        /* set the background color of the div */
+        margin: auto;
+        /* set the margin to auto for both horizontal and vertical axes */
+        position: absolute;
+        /* set the position to absolute to center the div in the middle of the page */
+        top: 0;
+        /* set the top position to 0 */
+        bottom: 0;
+        /* set the bottom position to 0 */
+        left: 0;
+        /* set the left position to 0 */
+        right: 0;
+        /* set the right position to 0 */
+    }
+</style>
+</head>
+
+<body>  
+    <div class = 'div'>
+<table>
+    <th>Flight Number</th>
+    <th>Departure Time</th>
+    <th>Arrival Time</th>
+    {% for line in result %}
+    <tr>
+        <td>{{line[0]}}</td>
+        <td>{{line[1]}}</td>
+        <td>{{line[2]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<form action="/addFlightAdmin" method="POST">
+    <p> Format: YYYY-MM-DD hh:mm:ss </p></br>
+    <label>Depart time:</label>
+    <input type="text" name="depart_time" required /> </br>
+    <label>Arrive time:</label>
+    <input type="text" name="arrive_time" required /> </br>
+    <label>Price:</label>
+    <input type="text" name="price" required /> </br>
+
+    <label>Status:</label> </br>
+    <input type="radio" id="upcoming" name="status" value="upcoming" required>
+      <label for="upcoming">upcoming<br>
+        <input type="radio" id="delayed" name="status" value="delayed" required>
+          <label for="delayed">delayed</label><br>
+        <input type="radio" id="in-progress" name="status" value="in-progress" required>
+          <label for="in-progress">in-progress</label><br>
+        <p>Plane ID:</p>
+        <table>
+            {% for line in result_plane %}
+            <tr>
+                <td>
+                    <input type="radio" id="plane_id" name="plane_id" value="{{line[0]}}" required>
+                      <label for="plane_id"> {{line[0]}} </label>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <p>Depart Airport:</p>
+        <table>
+            {% for line in result_port %}
+            <tr>
+                <td>
+                    <input type="radio" id="depart_airport" name="depart_airport" value={{line[0]}} required>
+                      <label for="depart_airport"> {{line[0]}} </label>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <p>Arrive Airport:</p>
+        <table>
+            {% for line in result_port %}
+            <tr>
+                <td>
+                    <input type="radio" id="arrive_airport" name="arrive_airport" value={{line[0]}} required>
+                      <label for="arrive_airport"> {{line[0]}} </label>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value=add>
+</form>
+{% if banner %}
+<p class="banner"><strong>The operation you just did is:</strong> {{banner}}</p>
+{% endif %}
+
+    </div>
+        
+  
+   
+</body>
+</html>

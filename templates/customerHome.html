@@ -1,0 +1,127 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+
+    body {
+        background-color: aqua;
+  background-image: url("https://plus.unsplash.com/premium_photo-1673998269850-8f953fd2fe0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+
+    }
+
+    .div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+     
+        width: 50%;
+        /* set the width of the div */
+        
+        /* set the height of the div */
+        background-color: gold;
+        /* set the background color of the div */
+        margin: auto;
+        /* set the margin to auto for both horizontal and vertical axes */
+        position: absolute;
+        /* set the position to absolute to center the div in the middle of the page */
+    
+        /* set the right position to 0 */
+    }
+</style>
+</head>
+
+<body>
+
+<div class = "div">
+<form action="/viewCus" method="POST">
+    <input class = 'btn-primary' type="submit" name="view_my_flight" value='View My Flight' />
+</form>
+
+<style type="text/css">
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
+
+<table>
+    <th>Flight Number</th>
+    <th>Departure Time</th>
+    <th>Arrival Time</th>
+
+    {% for line in result %}
+    <tr>
+        <td>{{line[0]}}</td>
+        <td>{{line[1]}}</td>
+        <td>{{line[2]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<form action="/searchCus" method="POST">
+    <label>Source City / Departure Airport:</label>
+    <input class = 'form-control' type="text" name="dep_city_port" required /> </br>
+    <label>Destination City / Arrival Airport:</label>
+    <input class = 'form-control' type="text" name="des_city_port" required /></br>
+    <label>Date:</label>
+    <input class = 'form-control' type="text" name="date" required /> </br>
+    <input class = 'btn-primary' type="submit" value=Search />
+</form>
+<style type="text/css">
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
+
+<table>
+    <th>Flight Number</th>
+    <th>Departure Time</th>
+    <th>Arrival Time</th>
+    <form action="/purticketCus" method="POST">
+        {% for line in result1 %}
+        <tr>
+            <td>{{line[0]}}</td>
+            <td>{{line[1]}}</td>
+            <td>{{line[2]}}</td>
+            <td>
+                <input type="radio" id="ticket" name="ticket" value={{line[0]}}>
+                  <label for="ticket">Purchase</label>
+            </td>
+        </tr>
+        {% endfor %}
+</table>
+<input class = 'btn-primary' type="submit" value=Confirm />
+</form>
+{% if banner %}
+<p class="banner"><strong>The operation you just did is:</strong> {{banner}}</p>
+{% endif %}
+
+{% if is_special %}
+<p style ="color:red">You are now a special customer for this airlines. From now on, you will be receiving discounts on your tickets</p>
+{% endif %}
+
+{% if note %}
+<p class="banner"><strong>note:</strong> {{note}}</p>
+{% endif %}
+
+<form action="/chartCus" method="POST">
+    <input class = 'btn-primary' type="submit" name="view" value='View your Spending' />
+</form>
+
+
+
+
+<a href="/logoutCus">Logout</a>
+</div>
+
+
+
+   
+</body>
+</html>

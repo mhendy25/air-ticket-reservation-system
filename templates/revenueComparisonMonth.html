@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<body>
+
+
+
+
+<input type="submit" name="submit" value="Make the Pie Chart" style="margin-bottom: 30px;" id="plotSubmit">
+
+
+<div id="my-pie-chart-container">
+
+
+
+
+<section>
+<div>
+<canvas id="canvas" width="400" height="300">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+</div>
+<p>Indirect sales for last month: {{data1}}</p> <br>
+<p>Direct sales for last month: {{data2}}</p> <br>
+
+<form style="margin-bottom: 50px;">
+    indirect Proportion for last month: <input type="number" placeholder="In 100% percentage.." id="first" name="first"
+        max="100" value={{indirect1}}><br />
+    direct Proportion for last month: <input type="number" placeholder="In 100% percentage.." id="second" name="second"
+        max="100" value={{direct1}}><br>
+
+</form>
+<script type="text/javascript">
+
+document.getElementById("plotSubmit").onclick = generatePie;
+
+var myColor = ["#ECD078","#ee3c3c","#dbd177"];
+var myData = [100,50,50];
+
+function generatePie() {
+    // Grab values from inputs and put them in the data array:
+    myData[1] = document.getElementById("first").value;
+    myData[2] = document.getElementById("second").value;
+   
+
+    // Call plotData again:
+    plotData();
+}
+
+function getTotal(){
+    var myTotal = 0;
+    for (var j = 0; j < myData.length; j++) {
+        myTotal += (typeof myData[j] == 'number') ? myData[j] : 0;
+    }
+    return myTotal;
+}
+
+function plotData() {
+    var canvas;
+    var ctx;
+    var lastend = 0;
+    var myTotal = getTotal();
+
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < myData.length; i++) {
+        ctx.fillStyle = myColor[i];
+        ctx.beginPath();
+        ctx.moveTo(200,150);
+        ctx.arc(200,150,150,lastend,lastend+(Math.PI*2*(myData[i]/myTotal)),false);
+        ctx.lineTo(200,150);
+        ctx.fill();
+        lastend += Math.PI*2*(myData[i]/myTotal);
+    }
+}
+
+plotData();
+
+</script>
+
+<a href="/login">Back</a>
+
+<style type="text/css">
+
+    body {
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  background-image: url("https://plus.unsplash.com/premium_photo-1673998269850-8f953fd2fe0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+
+    }
+
+    input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    input[type=radio]{
+        color : black
+    }
+
+    input[type=submit] {
+   
+    background-color:red;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+    background-color: red;
+    }
+
+    div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+            }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+        }
+
+</style>
+</body>
+</html>

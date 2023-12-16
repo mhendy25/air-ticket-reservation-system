@@ -1,0 +1,77 @@
+<html>
+<head>
+<style>
+    body {
+        background-color: aqua;
+  background-image: url("https://plus.unsplash.com/premium_photo-1673998269850-8f953fd2fe0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+
+    }
+
+    .div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        height: 20px;
+        width: 50%;
+        /* set the width of the div */
+        height: 300px;
+        /* set the height of the div */
+        background-color: white;
+        /* set the background color of the div */
+        margin: auto;
+        /* set the margin to auto for both horizontal and vertical axes */
+        position: absolute;
+        /* set the position to absolute to center the div in the middle of the page */
+        top: 0;
+        /* set the top position to 0 */
+        bottom: 0;
+        /* set the bottom position to 0 */
+        left: 0;
+        /* set the left position to 0 */
+        right: 0;
+        /* set the right position to 0 */
+    }
+</style>
+</head>
+<body>
+<div class = 'div'>
+<table>
+    <th>Staff Username</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <form action="/grantPermission" method="POST">
+        {% for line in result %}
+        <tr>
+            <td>{{line[0]}}</td>
+            <td>{{line[1]}}</td>
+            <td>{{line[2]}}</td>
+            <td>
+                <input type="radio" id="grant" name="grant" value={{line[0]}} required> </input>
+                  <label for="grant">Grant New Permission</label>
+            </td>
+        </tr>
+        {% endfor %}
+</table>
+<label>Status:</label> <br>
+    <input type="radio" id="AO" name="status" value=1 required>
+      <label for="AO">Admin and Operator</label>
+    <input type="radio" id="!AO" name="status" value=2 required>
+      <label for="!AO">Operator but not Admin</label>
+    <input type="radio" id="A!O" name="status" value=3 required>
+      <label for="A!O">Admin but not Operator</label>
+    <input type="radio" id="!A!O" name="status" value=4 required>
+      <label for="!A!O">Neither Operator nor Admin</label>  
+    <input type="submit" value=Confirm>
+    </form>
+
+    {% if banner %}
+    <p class="error"><strong>The operation you just did is:</strong> {{banner}}</p>
+    {% endif %}
+
+</div>
+
+  
+ 
+</body>
+</html>

@@ -1,0 +1,24 @@
+body {
+  background-color: aqua;
+}
+
+.div {
+  width: 50%;
+  /* set the width of the div */
+  height: 300px;
+  /* set the height of the div */
+  background-color: white;
+  /* set the background color of the div */
+  margin: auto;
+  /* set the margin to auto for both horizontal and vertical axes */
+  position: absolute;
+  /* set the position to absolute to center the div in the middle of the page */
+  top: 0;
+  /* set the top position to 0 */
+  bottom: 0;
+  /* set the bottom position to 0 */
+  left: 0;
+  /* set the left position to 0 */
+  right: 0;
+  /* set the right position to 0 */
+}
